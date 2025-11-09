@@ -1,4 +1,4 @@
-﻿# 🚀 [PROJECT NAME]
+﻿# 🚀 Clean Contoso University - ASP.NET Core Razor Pages
 
 This project is developed using **Clean Architecture** principles with ASP.NET Core Razor Pages. The goal is to provide a layered, testable, and maintainable structure.
 
@@ -29,3 +29,9 @@ Clone the project to your local machine:
 ```bash
 git clone [REPOSITORY_URL]
 cd [YOUR-PROJECT-FOLDER-NAME]
+```
+
+```bash
+dotnet ef migrations add [MigrationAdı] --startup-project .\src\Web\ --project .\src\Infrastructure\
+dotnet ef database update --startup-project .\src\Web\ --project .\src\Infrastructure\
+```
