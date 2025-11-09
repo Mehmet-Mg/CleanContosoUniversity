@@ -1,0 +1,74 @@
+@page
+@model CleanContosoUniversity.Web.Pages.TodoItems.IndexModel
+
+@{
+    ViewData["Title"] = "Todo Items";
+}
+
+@if (Model.ListId.HasValue)
+{
+    <h1>Todo Items - @Model.ListTitle</h1>
+}
+else
+{
+    <h1>Todo Items</h1>
+}
+
+<p>
+    @if (Model.ListId.HasValue)
+    {
+        <a asp-page="Create" asp-route-listId="@Model.ListId">Create New</a>
+        <span> | </span>
+        <a asp-page="../TodoLists/Index">Back to Lists</a>
+    }
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TodoItems.Items.FirstOrDefault()!.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TodoItems.Items.FirstOrDefault()!.Done)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.TodoItems.Items)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Done)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.TodoItems.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.TodoItems.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-listId="@Model.ListId"
+   asp-route-pageIndex="@(Model.TodoItems.PageNumber - 1)"
+   class="btn btn-primary @prevDisabled">
+    Previous
+</a>
+<a asp-page="./Index"
+   asp-route-listId="@Model.ListId"
+   asp-route-pageIndex="@(Model.TodoItems.PageNumber + 1)"
+   class="btn btn-primary @nextDisabled">
+    Next
+</a>
+

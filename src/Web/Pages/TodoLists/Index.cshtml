@@ -1,0 +1,52 @@
+@page
+@using CleanContosoUniversity.Web.Pages.TodoLists
+@model IndexModel
+@{
+    ViewData["Title"] = "Todo Lists";
+}
+
+<h1>Todo Lists</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Title
+            </th>
+            <th>
+                Colour
+            </th>
+            <th>
+                Items Count
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var list in Model.Todos.Lists)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => list.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => list.Colour)
+                </td>
+                <td>
+                    @list.Items.Count
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@list.Id">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@list.Id">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@list.Id">Delete</a> |
+                    <a asp-page="../TodoItems/Index" asp-route-listId="@list.Id">Items</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

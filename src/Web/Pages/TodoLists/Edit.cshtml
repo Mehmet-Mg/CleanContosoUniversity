@@ -1,0 +1,43 @@
+@page
+@using CleanContosoUniversity.Web.Pages.TodoLists
+@model CleanContosoUniversity.Web.Pages.TodoLists.EditModel
+
+@{
+    ViewData["Title"] = "Edit Todo List";
+}
+
+<h1>Edit</h1>
+
+<h4>Todo List</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="TodoList.Id" />
+            <div class="form-group">
+                <label asp-for="TodoList.Title" class="control-label"></label>
+                <input asp-for="TodoList.Title" class="form-control" />
+                <span asp-validation-for="TodoList.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TodoList.Colour" class="control-label"></label>
+                <input asp-for="TodoList.Colour" class="form-control" placeholder="#FFFFFF" />
+                <span asp-validation-for="TodoList.Colour" class="text-danger"></span>
+                <small class="form-text text-muted">Color code (e.g., #FFFFFF, #FF5733)</small>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
